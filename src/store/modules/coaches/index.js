@@ -10,7 +10,7 @@ export default {
         {
           id: 'c1',
           firstName: 'Jakub',
-          lastName: 'Kedziers',
+          lastName: 'Kedzierski',
           areas: ['frontend', 'backend', 'career'],
           description: "I'm Jakub, Nice to meet you!",
           hourlyRate: 30,

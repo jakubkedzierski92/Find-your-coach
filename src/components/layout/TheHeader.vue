@@ -7,9 +7,6 @@
         </h1>
         <ul>
           <li>
-            <router-link to="/requests" class="list-link">Field</router-link>
-          </li>
-          <li>
             <router-link to="/coaches" class="list-link"
               >All coaches</router-link
             >
