@@ -1,18 +1,33 @@
 <template>
-  <header>
-    <nav>
-      <h1>
-        <router-link to="/" class="logo-link">Find your Coach!</router-link>
-      </h1>
-      <ul>
-        <li><router-link to="/coaches" class="list-link">All coaches</router-link></li>
-        <li><router-link to="/requests"  class="list-link">Requests</router-link></li>
-      </ul>
-    </nav>
-  </header>
+  <div>
+    <header>
+      <nav>
+        <h1>
+          <router-link to="/" class="logo-link">FindYourCoach.com</router-link>
+        </h1>
+        <ul>
+          <li>
+            <router-link to="/requests" class="list-link">Field</router-link>
+          </li>
+          <li>
+            <router-link to="/coaches" class="list-link"
+              >All coaches</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/requests" class="list-link">Requests</router-link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </div>
 </template>
 
 <style scoped>
+div {
+  box-shadow: 0 0 10px
+
+}
 header {
   width: 100%;
   height: 5rem;
@@ -30,6 +45,9 @@ header a {
   border: 1px solid transparent;
 }
 
+.list-link {
+  border-color: white;
+}
 .list-link:active,
 .list-link:hover,
 .list-link.router-link-active {
@@ -49,7 +67,7 @@ h1 a {
 }
 
 .logo-link:hover,
-.logo-link:active{
+.logo-link:active {
   border-color: transparent;
 }
 
