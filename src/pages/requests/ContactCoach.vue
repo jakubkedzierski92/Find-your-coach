@@ -1,13 +1,14 @@
 <template>
   <base-card>
     <form @submit.prevent="submitForm">
+        <span><h2 class="title">Send me a message:</h2></span>
       <div>
         <label for="email">Your email</label>
-        <input type="email" id="email" v-model.trim="email.val" />
+        <input type="email" id="email" v-model.trim="email" />
       </div>
       <div>
         <label for="message">Message</label>
-        <textarea rows="7" id="message" v-model.trim="message.val"></textarea>
+        <textarea rows="7" id="message" v-model.trim="message"></textarea>
       </div>
       <p v-if="!formIsValid" class="errors">Please check Your email and message</p>
       <div class="actions">
@@ -33,6 +34,12 @@ export default {
                 this.formIsValid = false
                 return
             }
+            this.$store.dispatch('requests/contactCoach', {
+                email: this.email,
+                message: this.message,
+                coachId: this.$route.params.id
+            })
+            this.$router.replace('/coaches')
         },
     }
 }
@@ -79,5 +86,8 @@ textarea:focus {
 .actions {
   margin-top: 16px;
   text-align: center;
+}
+.title {
+    margin-top: 0;
 }
 </style>
