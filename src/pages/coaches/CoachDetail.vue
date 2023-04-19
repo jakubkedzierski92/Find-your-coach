@@ -7,14 +7,6 @@
   </section>
   <section>
     <base-card>
-      <header>
-        <h2>Are You interested? Reach out now!</h2>
-        <base-button link :to="contactLink">Contact</base-button>
-      </header>
-    </base-card>
-  </section>
-  <section>
-    <base-card>
       <base-badge
         v-for="area in areas"
         :key="area"
@@ -22,6 +14,14 @@
         :title="area"
       ></base-badge>
       <p>{{ description }}</p>
+    </base-card>
+  </section>
+  <section>
+    <base-card>
+      <header>
+        <h2>Are You interested? Reach out now!</h2>
+        <base-button link :to="contactLink">Contact</base-button>
+      </header>
     </base-card>
   </section>
 </template>
@@ -48,7 +48,7 @@ export default {
         return this.selectedCoach.description
     },
     contactLink(){
-        return this.$route.path + "/" + this.id + "/contact"
+        return "/coaches/" + this.id + "/contact"
     }
   },
   created() {
