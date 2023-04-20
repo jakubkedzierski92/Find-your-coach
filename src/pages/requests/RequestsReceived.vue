@@ -4,7 +4,8 @@
       <header>
         <h2>Requests Received</h2>
       </header>
-      <ul v-if="hasRequests">
+      <base-spinner v-if="isLoading"></base-spinner>
+      <ul v-else-if="hasRequests">
         <request-item
           v-for="req in receivedRequests"
           :key="req.id"
@@ -21,18 +22,33 @@
 import RequestItem from '../../components/requests/RequestItem.vue';
 
 export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   components: {
     RequestItem,
   },
   computed: {
     receivedRequests() {
-        // console.log("Dupa")
+      // console.log("Dupa")
       return this.$store.getters['requests/requests'];
     },
     hasRequests() {
       return this.$store.getters['requests/hasRequests'];
     },
   },
+  methods: {
+    async loadReqs() {
+      this.isLoading = true;
+      await this.$store.dispatch('requests/fetchRequests');
+      this.isLoading = false
+    },
+  },
+  created(){
+    this.loadReqs()
+  }
 };
 </script>
 
