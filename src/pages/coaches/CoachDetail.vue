@@ -1,29 +1,31 @@
 <template>
-  <section>
-    <base-card>
-      <h2>{{ fullName }}</h2>
-      <h3>${{ rate }}/hour</h3>
-    </base-card>
-  </section>
-  <section>
-    <base-card>
-      <base-badge
-        v-for="area in areas"
-        :key="area"
-        :type="area"
-        :title="area"
-      ></base-badge>
-      <p>{{ description }}</p>
-    </base-card>
-  </section>
-  <section>
-    <base-card>
-      <header>
-        <h2>Are You interested? Reach out now!</h2>
-        <base-button link :to="contactLink">Contact</base-button>
-      </header>
-    </base-card>
-  </section>
+  <div>
+    <section>
+      <base-card>
+        <h2>{{ fullName }}</h2>
+        <h3>${{ rate }}/hour</h3>
+      </base-card>
+    </section>
+    <section>
+      <base-card>
+        <base-badge
+          v-for="area in areas"
+          :key="area"
+          :type="area"
+          :title="area"
+        ></base-badge>
+        <p>{{ description }}</p>
+      </base-card>
+    </section>
+    <section>
+      <base-card>
+        <header>
+          <h2>Are You interested? Reach out now!</h2>
+          <base-button link :to="contactLink">Contact</base-button>
+        </header>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -35,21 +37,21 @@ export default {
     };
   },
   computed: {
-    fullName(){
-        return this.selectedCoach.firstName + " " +  this.selectedCoach.lastName
+    fullName() {
+      return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
     },
-    areas(){
-        return this.selectedCoach.areas
+    areas() {
+      return this.selectedCoach.areas;
     },
-    rate(){
-        return this.selectedCoach.hourlyRate
+    rate() {
+      return this.selectedCoach.hourlyRate;
     },
-    description(){
-        return this.selectedCoach.description
+    description() {
+      return this.selectedCoach.description;
     },
-    contactLink(){
-        return "/coaches/" + this.id + "/contact"
-    }
+    contactLink() {
+      return '/coaches/' + this.id + '/contact';
+    },
   },
   created() {
     this.selectedCoach = this.$store.getters['coaches/coaches'].find(

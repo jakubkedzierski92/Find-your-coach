@@ -1,48 +1,56 @@
 <template>
-  <base-card>
-    <form @submit.prevent="submitForm">
+  <div>
+    <base-card>
+      <form @submit.prevent="submitForm">
         <span><h2 class="title">Send me a message:</h2></span>
-      <div>
-        <label for="email">Your email</label>
-        <input type="email" id="email" v-model.trim="email" />
-      </div>
-      <div>
-        <label for="message">Message</label>
-        <textarea rows="7" id="message" v-model.trim="message"></textarea>
-      </div>
-      <p v-if="!formIsValid" class="errors">Please check Your email and message</p>
-      <div class="actions">
-        <base-button>Send Message</base-button>
-      </div>
-    </form></base-card
-  >
+        <div>
+          <label for="email">Your email</label>
+          <input type="email" id="email" v-model.trim="email" />
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea rows="7" id="message" v-model.trim="message"></textarea>
+        </div>
+        <p v-if="!formIsValid" class="errors">
+          Please check Your email and message
+        </p>
+        <div class="actions">
+          <base-button>Send Message</base-button>
+        </div>
+      </form>
+    </base-card>
+  </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            email: "",
-            message: "",
-            formIsValid: true
-        }
+  data() {
+    return {
+      email: '',
+      message: '',
+      formIsValid: true,
+    };
+  },
+  methods: {
+    submitForm() {
+      this.isValid = true;
+      if (
+        this.email === '' ||
+        !this.email.includes('@') ||
+        this.message === ''
+      ) {
+        this.formIsValid = false;
+        return;
+      }
+      this.$store.dispatch('requests/contactCoach', {
+        email: this.email,
+        message: this.message,
+        coachId: this.$route.params.id,
+      });
+      this.$router.replace('/coaches');
     },
-    methods: {
-        submitForm(){
-            this.isValid = true;
-            if(this.email === '' || !this.email.includes('@') || this.message === ''){
-                this.formIsValid = false
-                return
-            }
-            this.$store.dispatch('requests/contactCoach', {
-                email: this.email,
-                message: this.message,
-                coachId: this.$route.params.id
-            })
-            this.$router.replace('/coaches')
-        },
-    }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -88,6 +96,6 @@ textarea:focus {
   text-align: center;
 }
 .title {
-    margin-top: 0;
+  margin-top: 0;
 }
 </style>
