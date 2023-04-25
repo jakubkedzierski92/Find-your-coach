@@ -11,15 +11,35 @@
               >All coaches</router-link
             >
           </li>
-          <li>
-            <router-link to="/requests" class="list-link">Requests</router-link>
+          <li v-if="isLoggedIn">
+            <router-link to="/requests" class="list-link" >Requests</router-link>
+          </li>
+          <li v-else>
+            <router-link to="/auth" class="list-link">Login</router-link>
+          </li>
+          <li v-if="isLoggedIn">
+            <base-button class="list-link" @click="logout">Logout</base-button>
           </li>
         </ul>
       </nav>
     </header>
   </div>
 </template>
-
+<script>
+export default{
+  computed: {
+    isLoggedIn(){
+      return this.$store.getters.isAuthenticated
+    }
+  },
+  methods: {
+    logout(){
+      this.$store.dispatch('logout')
+      this.$router.replace('/coaches')
+    }
+  }
+}
+</script>
 <style scoped>
 div {
   box-shadow: 0 0 10px
@@ -45,6 +65,7 @@ header a {
 
 .list-link {
   border-color: white;
+  border-radius: 0;
 }
 .list-link:active,
 .list-link:hover,

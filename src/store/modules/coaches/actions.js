@@ -6,30 +6,34 @@ export default {
       lastName: data.last,
       description: data.desc,
       hourlyRate: data.rate,
-      areas: data.areas,
+      areas: data.areas
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `https://findyourcoach-b1af5-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://findyourcoach-b1af5-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=`  +
+        token,
       {
         method: 'PUT',
-        body: JSON.stringify(coachData),
+        body: JSON.stringify(coachData)
       }
     );
 
-    //const responseData = await response.json()
+    // const responseData = await response.json();
+
     if (!response.ok) {
-      //error
+      // error ...
     }
 
     context.commit('registerCoach', {
       ...coachData,
-      id: userId,
+      id: userId
     });
   },
   async loadCoaches(context, payload) {
-    if(!payload.forceRefresh && !context.getters.shouldUpdate){
-      return
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
     }
     const response = await fetch(
       `https://findyourcoach-b1af5-default-rtdb.firebaseio.com/coaches.json`
@@ -49,9 +53,9 @@ export default {
         hourlyRate: responseData[key].hourlyRate,
         areas: responseData[key].areas,
       };
-      coaches.push(coach)
+      coaches.push(coach);
     }
-    context.commit('setCoaches', coaches)
-    context.commit('setFetchTimestamp')
+    context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
   },
 };
