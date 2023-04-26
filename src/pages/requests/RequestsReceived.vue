@@ -32,7 +32,6 @@ export default {
   },
   computed: {
     receivedRequests() {
-      // console.log("Dupa")
       return this.$store.getters['requests/requests'];
     },
     hasRequests() {
